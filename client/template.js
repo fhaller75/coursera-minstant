@@ -28,9 +28,8 @@ Template.chat_page.helpers({
     return chat.messages;
   }, 
   other_user:function(){
-    return ""
-  }, 
-
+    return "";
+  }
 })
 Template.chat_page.events({
 // this event fires when the user sends a message on the chat page
@@ -48,7 +47,7 @@ Template.chat_page.events({
     // is a good idea to insert data straight from the form
     // (i.e. the user) into the database?? certainly not. 
     // push adds the message to the end of the array
-    msgs.push({text: event.target.chat.value});
+    msgs.push({authorId: event.target.authorId.value, text: event.target.chat.value});
     // reset the form
     event.target.chat.value = "";
     // put the messages array onto the chat object
@@ -57,4 +56,18 @@ Template.chat_page.events({
     Chats.update(chat._id, chat);
   }
 }
+})
+
+Template.chat_message.helpers({
+  user:function(userId){
+    return Meteor.users.findOne({_id:userId});
+  },
+  isMyUser:function(userId){
+    if (userId == Meteor.userId()){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 })

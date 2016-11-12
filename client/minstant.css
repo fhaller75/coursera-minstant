@@ -1,10 +1,27 @@
 /* CSS declarations go here */
 
 .user_avatar{
-	min-height:100px;
-	text-align: center;
-
+  min-height:100px;
+  text-align: center;
 }
 .avatar_img{
-	height:75px;
+  height:75px;
+}
+
+.user_avatar_small{
+	min-height:50px;
+	text-align: center;
+}
+.avatar_img_small{
+	height:35px;
+}
+
+.msg_block{
+  min-height: 50px;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  background: white;
+}
+.floating{
+  float: left;
 }

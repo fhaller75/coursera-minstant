@@ -13,7 +13,8 @@
     <div class="row">
     <div class="col-md-12">
       <form class="js-send-chat">
-      <input class="input" type="text" name="chat" placeholder="type a message here...">
+        <input class="input" type="text" name="chat" placeholder="type a message here...">
+        <input class="input" type="hidden" name="authorId" value={{currentUser._id}}>
       <button class="btn btn-default">send</button>
     </form>
     </div>
@@ -22,7 +23,27 @@
 
 <!-- simple template that displays a message -->
 <template name="chat_message">
-  someone said: {{text}}
+  <div class="row">
+    <div class="col-md-2">
+      {{#with user authorId}}
+        <div class="user_avatar_small">
+          {{#if isMyUser _id}} 
+            <div class="bg-success">{{profile.username}} (YOU)
+              <br/>
+              <img src="/{{profile.avatar}}" class="avatar_img_small">
+            </div>
+          {{else}}
+            <div class="bg-primary">{{profile.username}}
+              <br/>
+              <img src="/{{profile.avatar}}" class="avatar_img_small">
+            </div>
+          {{/if}}
+        </div>
+      {{/with}} 
+    </div>
+    <div class="col-md-1">said:</div>
+    <div class="msg_block col-md-9">{{text}}</div>
+  </div>
   <br>
 </template>
 
