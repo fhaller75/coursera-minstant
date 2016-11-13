@@ -22,7 +22,9 @@ Router.route('/chat/:_id', function () {
               ]};
   var chat = Chats.findOne(filter);
   if (!chat){// no chat matching the filter - need to insert a new one
-    chatId = Chats.insert({user1Id:Meteor.userId(), user2Id:otherUserId});
+    // chatId = Chats.insert({user1Id:Meteor.userId(), user2Id:otherUserId});
+    users = {user1Id:Meteor.userId(), user2Id:otherUserId};
+    chatId = Meteor.call('initChat', users);
   }
   else {// there is a chat going already - use that. 
     chatId = chat._id;
@@ -31,6 +33,11 @@ Router.route('/chat/:_id', function () {
     Session.set("chatId",chatId);
   }
   this.render("navbar", {to:"header"});
-  this.render("chat_page", {to:"main"});  
+  if (!Meteor.user()){
+    alert("Please login to chat.");
+  }
+  else {
+    this.render("chat_page", {to:"main"});  
+  }
 });
 

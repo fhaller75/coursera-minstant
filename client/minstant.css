@@ -15,13 +15,3 @@
 .avatar_img_small{
 	height:35px;
 }
-
-.msg_block{
-  min-height: 50px;
-  border: 1px solid lightgrey;
-  border-radius: 4px;
-  background: white;
-}
-.floating{
-  float: left;
-}
